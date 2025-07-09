@@ -1,0 +1,5 @@
+outs:
+- md5: 64d7f959856b93287ee22705ec306cd4
+  size: 444343
+  hash: md5
+  path: Daily_Prices_Home_NEW.csv
