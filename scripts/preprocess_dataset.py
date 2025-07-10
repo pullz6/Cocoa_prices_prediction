@@ -2,9 +2,12 @@ import pandas as pd
 import numpy as np 
 from pathlib import Path
 
-data_path = Path(__file__).parent.parent / "data" / "Daily_Prices_Home_NEW.csv"
+def read_data(): 
+    '''Reading the data'''
+    data_path = Path(__file__).parent.parent / "data" / "Daily_Prices_Home_NEW.csv"
+    df = pd.read_csv(data_path)
+    return df
 
-df = pd.read_csv(data_path)
 
 def preprocess_data(df): 
     '''General preprocessing, converting columns to the requires data types'''
@@ -24,3 +27,12 @@ def preprocess_data(df):
     
     return df
 
+def save_preprocessed_data(df): 
+    '''Saving the preprocessed the data folder'''
+    save_path = Path(__file__).parent.parent / "data" / "processed_df.csv"
+    df.to_csv(save_path)
+    return df
+
+df = read_data()
+preprocessed_df = preprocess_data(df)
+save_preprocessed_data(preprocessed_df)
