@@ -6,9 +6,12 @@ import mlflow
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
 
-mlflow.set_tracking_uri("http://localhost:5000")
+uri = mlflow.get_tracking_uri()
+mlflow.set_tracking_uri(uri)
 
-mlflow.start_run()
+mlflow.set_experiment("Cocoa_price_prediction")
+
+#mlflow.start_run()
 
 
 
