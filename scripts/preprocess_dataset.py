@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np 
+from pathlib import Path
 from utils_and_constants import read_data
 
 def preprocess_data(df): 
@@ -18,6 +19,20 @@ def preprocess_data(df):
     df['ICCO daily price (Euro/tonne)'] = df['ICCO daily price (Euro/tonne)'].str.replace(',', '')
     df['ICCO daily price (Euro/tonne)'] = df['ICCO daily price (Euro/tonne)'].astype(float)
     
+    df['Price_Lag1'] = df['ICCO daily price (US$/tonne)'].shift(1) 
+    df['Price_Lag2'] = df['ICCO daily price (US$/tonne)'].shift(2)
+    df['Price_Lag3'] = df['ICCO daily price (US$/tonne)'].shift(3)
+    df['Price_Lag4'] = df['ICCO daily price (US$/tonne)'].shift(4)
+    df['Price_Lag5'] = df['ICCO daily price (US$/tonne)'].shift(5)
+    df['Price_Lag6'] = df['ICCO daily price (US$/tonne)'].shift(6)
+    df['Price_Lag7'] = df['ICCO daily price (US$/tonne)'].shift(7)
+    
+    df['Rolling_Mean_7'] = df['ICCO daily price (US$/tonne)'].rolling(window=7).mean()
+    df['Rolling_Std_7'] = df['ICCO daily price (US$/tonne)'].rolling(window=7).std()
+    
+    df['MA_7'] = df['ICCO daily price (US$/tonne)'].rolling(window=7).mean()
+    df['MA_30'] = df['ICCO daily price (US$/tonne)'].rolling(window=30).mean()
+    
     return df
 
 def save_preprocessed_data(df): 
@@ -26,6 +41,6 @@ def save_preprocessed_data(df):
     df.to_csv(save_path)
     return df
 
-df = read_data("Daily_Prices_Home_NEW.csv")
+df = read_data("Daily_Prices_Home_NEW.csv",'raw')
 preprocessed_df = preprocess_data(df)
 save_preprocessed_data(preprocessed_df)
