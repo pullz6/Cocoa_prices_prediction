@@ -1,0 +1,15 @@
+stages:
+  preprocess:
+    cmd: python3 scripts/preprocess_dataset.py
+    deps:
+    - data/Daily_Prices_Home_NEW.csv
+    - scripts/utils_and_constants.py
+    outs:
+    - data/processed_df.csv
+  eda:
+    cmd: python3 scripts/eda.py
+    deps:
+    - data/processed_df.csv
+    - scripts/utils_and_constants.py
+    outs:
+    - plots/

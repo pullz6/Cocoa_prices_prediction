@@ -1,0 +1,18 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python3 scripts/preprocess_dataset.py
+    deps:
+    - path: data/Daily_Prices_Home_NEW.csv
+      hash: md5
+      md5: 64d7f959856b93287ee22705ec306cd4
+      size: 444343
+    - path: scripts/utils_and_constants.py
+      hash: md5
+      md5: 32b7a12e38854f937b754a9e8842cda4
+      size: 608
+    outs:
+    - path: data/processed_df.csv
+      hash: md5
+      md5: 596a823545358602f8fd0e1660c488b4
+      size: 1353940
