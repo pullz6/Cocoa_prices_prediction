@@ -55,7 +55,7 @@ with mlflow.start_run():
     plt.ylabel("Predicted Prices")
     plt.title("Actual vs. Predicted Chocolate Prices")
     save_plot('Predictions')
-    plt.show()
+    #plt.show()
     
     residuals = y_test - model.predict(X_test)
     plt.scatter(y_test, residuals)
@@ -64,7 +64,7 @@ with mlflow.start_run():
     plt.ylabel("Residuals")
     plt.title("Residual Plot")
     save_plot('residual_plot')
-    plt.show()
+    #plt.show()
 
 
 
