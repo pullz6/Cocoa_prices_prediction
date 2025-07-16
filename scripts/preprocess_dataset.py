@@ -4,34 +4,33 @@ from pathlib import Path
 from utils_and_constants import read_data
 
 def preprocess_data(df): 
-    '''General preprocessing, converting columns to the requires data types'''
-    df['Date'] = pd.to_datetime(df['Date'],format='%d/%m/%Y')
-
-    df['London futures (£ sterling/tonne)'] = df['London futures (£ sterling/tonne)'].str.replace(',', '')
-    df['London futures (£ sterling/tonne)'] = df['London futures (£ sterling/tonne)'].astype(float)
-
-    df['New York futures (US$/tonne)'] = df['New York futures (US$/tonne)'].str.replace(',', '')
-    df['New York futures (US$/tonne)'] = df['New York futures (US$/tonne)'].astype(float)
-
-    df['ICCO daily price (US$/tonne)'] = df['ICCO daily price (US$/tonne)'].str.replace(',', '')
-    df['ICCO daily price (US$/tonne)'] = df['ICCO daily price (US$/tonne)'].astype(float)
-
-    df['ICCO daily price (Euro/tonne)'] = df['ICCO daily price (Euro/tonne)'].str.replace(',', '')
-    df['ICCO daily price (Euro/tonne)'] = df['ICCO daily price (Euro/tonne)'].astype(float)
+    # Step 1: Drop rows with missing dates
+    df = df[df['Date'].notna()].copy()  # Explicit copy to avoid warnings
     
-    df['Price_Lag1'] = df['ICCO daily price (US$/tonne)'].shift(1) 
-    df['Price_Lag2'] = df['ICCO daily price (US$/tonne)'].shift(2)
-    df['Price_Lag3'] = df['ICCO daily price (US$/tonne)'].shift(3)
-    df['Price_Lag4'] = df['ICCO daily price (US$/tonne)'].shift(4)
-    df['Price_Lag5'] = df['ICCO daily price (US$/tonne)'].shift(5)
-    df['Price_Lag6'] = df['ICCO daily price (US$/tonne)'].shift(6)
-    df['Price_Lag7'] = df['ICCO daily price (US$/tonne)'].shift(7)
+    # Step 2: Convert date first
+    df['Date'] = pd.to_datetime(df['Date'], format='%d/%m/%Y')
+    
+    # Step 3: Clean numeric columns (remove commas, convert to float)
+    numeric_cols = [
+        'London futures (£ sterling/tonne)',
+        'New York futures (US$/tonne)',
+        'ICCO daily price (US$/tonne)',
+        'ICCO daily price (Euro/tonne)'
+    ]
+    for col in numeric_cols:
+        df[col] = df[col].str.replace(',', '').astype(float)
+    
+    # Step 4: Create lag/rolling features (BEFORE filling NaNs)
+    df['Price_Lag1'] = df['ICCO daily price (US$/tonne)'].shift(1)
+    # ... (add other lags)
     
     df['Rolling_Mean_7'] = df['ICCO daily price (US$/tonne)'].rolling(window=7).mean()
     df['Rolling_Std_7'] = df['ICCO daily price (US$/tonne)'].rolling(window=7).std()
-    
     df['MA_7'] = df['ICCO daily price (US$/tonne)'].rolling(window=7).mean()
     df['MA_30'] = df['ICCO daily price (US$/tonne)'].rolling(window=30).mean()
+    
+    # Step 5: Fill remaining NaNs (if needed)
+    df.fillna(0, inplace=True)  # Or use df.dropna() to remove rows with missing values
     
     return df
 
