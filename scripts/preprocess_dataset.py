@@ -22,6 +22,12 @@ def preprocess_data(df):
     
     # Step 4: Create lag/rolling features (BEFORE filling NaNs)
     df['Price_Lag1'] = df['ICCO daily price (US$/tonne)'].shift(1)
+    df['Price_Lag2'] = df['ICCO daily price (US$/tonne)'].shift(2)
+    df['Price_Lag3'] = df['ICCO daily price (US$/tonne)'].shift(3)
+    df['Price_Lag4'] = df['ICCO daily price (US$/tonne)'].shift(4)
+    df['Price_Lag5'] = df['ICCO daily price (US$/tonne)'].shift(5)
+    df['Price_Lag6'] = df['ICCO daily price (US$/tonne)'].shift(6)
+    df['Price_Lag7'] = df['ICCO daily price (US$/tonne)'].shift(7)
     # ... (add other lags)
     
     df['Rolling_Mean_7'] = df['ICCO daily price (US$/tonne)'].rolling(window=7).mean()
