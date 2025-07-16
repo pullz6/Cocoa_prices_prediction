@@ -12,8 +12,8 @@ from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
 
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense
+# from tensorflow.keras.models import Sequential
+# from tensorflow.keras.layers import LSTM, Dense
 
 uri = mlflow.get_tracking_uri()
 mlflow.set_tracking_uri(uri)
