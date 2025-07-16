@@ -1,7 +1,8 @@
 import pandas as pd 
 import numpy as np 
 import json
-from utils_and_constants import read_data
+from utils_and_constants import read_data, save_plot
+import matplotlib.pyplot as plt
 
 import mlflow
 
@@ -48,6 +49,22 @@ with mlflow.start_run():
     
     with open("metrics/metrics.json", 'w') as f:
         json.dump(eval, f)
+    
+    plt.scatter(y_test, y_pred)
+    plt.xlabel("Actual Prices")
+    plt.ylabel("Predicted Prices")
+    plt.title("Actual vs. Predicted Chocolate Prices")
+    save_plot('Predictions')
+    plt.show()
+    
+    residuals = y_test - model.predict(X_test)
+    plt.scatter(y_test, residuals)
+    plt.axhline(y=0, color='r', linestyle='--')
+    plt.xlabel("Actual Prices")
+    plt.ylabel("Residuals")
+    plt.title("Residual Plot")
+    save_plot('residual_plot')
+    plt.show()
 
 
 
