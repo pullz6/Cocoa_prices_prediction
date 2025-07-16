@@ -1,11 +1,15 @@
 import pandas as pd 
 import numpy as np 
+import json
 from utils_and_constants import read_data
 
 import mlflow
 
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import r2_score
 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
@@ -28,9 +32,22 @@ with mlflow.start_run():
     # Evaluation metrics are automatically captured
     train_score = model.score(X_train, y_train)
     test_score = model.score(X_test, y_test)
+    
+    y_pred = model.predict(X_test)
+    mae = mean_absolute_error(y_test, y_pred)
+    mse = mean_squared_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
 
     print(f"Training accuracy: {train_score:.3f}")
     print(f"Test accuracy: {test_score:.3f}")
+    print("Mean Absolute Error: ", mae)
+    print("Mean Squared Error: ", mse)
+    print("R2 Score: ", r2)
+    
+    eval = {"Training accuracy": train_score,"Test accuracy": test_score,"Mean Absolute Error": mae,"Mean Squared Error": mse,"R2 Score": r2}
+    
+    with open("metrics/metrics.json", 'w') as f:
+        json.dump(eval, f)
 
 
 
