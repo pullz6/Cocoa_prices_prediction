@@ -3,6 +3,7 @@ import numpy as np
 import json
 from utils_and_constants import read_data, save_plot
 import matplotlib.pyplot as plt
+import pickle
 
 import mlflow
 
@@ -65,6 +66,9 @@ with mlflow.start_run():
     plt.title("Residual Plot")
     save_plot('residual_plot')
     #plt.show()
+    
+    with open('model.pkl', 'wb') as f:
+        pickle.dump(model, f)
 
 
 

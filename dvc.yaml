@@ -21,3 +21,4 @@ stages:
     - metrics/metrics.json
     - plot/Predictions.png
     - plot/residual_plot.png
+    - model.pkl

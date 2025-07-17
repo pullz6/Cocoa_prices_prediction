@@ -44,6 +44,10 @@ stages:
       hash: md5
       md5: e2657aba0d9507572e37cabf8f1f9439
       size: 193
+    - path: model.pkl
+      hash: md5
+      md5: 228814700d854f611b5e386f6bff9439
+      size: 784
     - path: plot/Predictions.png
       hash: md5
       md5: 9e7460a4d185bb3b478deb3340bd79b4
