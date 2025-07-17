@@ -13,3 +13,11 @@ stages:
     - scripts/utils_and_constants.py
     outs:
     - plot/time_series.png
+  training_and_eval:
+    cmd: python3 scripts/model.py
+    deps:
+    - data/processed_df.csv
+    outs:
+    - metrics/metrics.json
+    - plot/Predictions.png
+    - plot/residual_plot.png

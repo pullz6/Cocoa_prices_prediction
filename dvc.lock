@@ -32,3 +32,23 @@ stages:
       hash: md5
       md5: 995f9428a611d42c62173bace3c3612c
       size: 40922
+  training_and_eval:
+    cmd: python3 scripts/model.py
+    deps:
+    - path: data/processed_df.csv
+      hash: md5
+      md5: 596a823545358602f8fd0e1660c488b4
+      size: 1353940
+    outs:
+    - path: metrics/metrics.json
+      hash: md5
+      md5: e2657aba0d9507572e37cabf8f1f9439
+      size: 193
+    - path: plot/Predictions.png
+      hash: md5
+      md5: 9e7460a4d185bb3b478deb3340bd79b4
+      size: 24488
+    - path: plot/residual_plot.png
+      hash: md5
+      md5: f1ee25eff84f3b945d3c7876c61e25c9
+      size: 27044
