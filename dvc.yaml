@@ -12,4 +12,4 @@ stages:
     - data/processed_df.csv
     - scripts/utils_and_constants.py
     outs:
-    - plots/
+    - plot/time_series.png

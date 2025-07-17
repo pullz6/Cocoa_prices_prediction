@@ -9,10 +9,26 @@ stages:
       size: 444343
     - path: scripts/utils_and_constants.py
       hash: md5
-      md5: 32b7a12e38854f937b754a9e8842cda4
-      size: 608
+      md5: 8642ff85fec2b1f408a2928e9112f3fc
+      size: 602
     outs:
     - path: data/processed_df.csv
       hash: md5
       md5: 596a823545358602f8fd0e1660c488b4
       size: 1353940
+  eda:
+    cmd: python3 scripts/eda.py
+    deps:
+    - path: data/processed_df.csv
+      hash: md5
+      md5: 596a823545358602f8fd0e1660c488b4
+      size: 1353940
+    - path: scripts/utils_and_constants.py
+      hash: md5
+      md5: 8642ff85fec2b1f408a2928e9112f3fc
+      size: 602
+    outs:
+    - path: plot/time_series.png
+      hash: md5
+      md5: 995f9428a611d42c62173bace3c3612c
+      size: 40922
