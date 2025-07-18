@@ -17,5 +17,5 @@ def read_data(name,type):
 
 def save_plot(name): 
     '''Saving the plot in the plots folder'''
-    data_path = Path(__file__).parent.parent / "plots" / name
+    data_path = Path(__file__).parent.parent / "plot" / name
     plt.savefig(data_path)

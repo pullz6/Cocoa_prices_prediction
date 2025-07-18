@@ -16,7 +16,6 @@ def time_series(df,save):
     if save ==True: 
         save_plot('time_series')
     plt.show()
-    
   
 df = read_data('processed_df.csv','')
-time_series(df,save=False)
+time_series(df,save=True)
