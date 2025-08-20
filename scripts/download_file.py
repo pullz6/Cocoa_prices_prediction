@@ -8,9 +8,7 @@ def extract_icco_data(**kwargs):
     Airflow Task: Extracts the raw CSV data from the ICCO website.
     First finds the correct CSV URL from the statistics page, then downloads the data.
     Pushes the CSV text to XCom for downstream tasks.
-    
-    Returns:
-        str: The raw CSV data as a string.
+
     """
     # URL of the main statistics page
     stats_page_url = "https://www.icco.org/statistics"
