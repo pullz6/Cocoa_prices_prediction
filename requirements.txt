@@ -5,3 +5,5 @@ matplotlib
 scikit-learn
 tensorflow
 mlflow
+bs4
+apache-airflow==3.0.4
