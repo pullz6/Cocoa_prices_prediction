@@ -1,1 +1,2 @@
-read me to be finalized
+need to include the finalized version. 
+
